@@ -97,6 +97,7 @@ A host folder named code in the directory, where the Vagrantfile is stored, is m
 * Start Virtual Box GUI 
 * Select hgb-phpdev-base Image and clone it to hgb-phpdev-standalone
 * Remove all shared folders added by vagrant
+* Zip Files. They are provided on [FHOOE Cloud](https://filebox.fhooecloud.at/s/g2yZ0XEMiEaIJ7A)
 * Here Students must add there code folder from the host maschine and map it to code
 * Start Box
 * Login with vagrant/vagrant

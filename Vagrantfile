@@ -6,10 +6,11 @@ Vagrant.configure("2") do |config|
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
-  # We use the original ubuntu box with ubuntu 16.04 LTS based on bento/ubuntu-16.04
+  # We use a ubuntu box with ubuntu 16.04 LTS based on bento/ubuntu-16.04
   config.vm.box = "fhooe/hgb-phpdev" 
   config.vm.box_version = "1.0.0"
-
+  config.vm.boot_timeout = 1500
+  
   # Deactivate hardware accelleration for Vitualization in Virtual Box (Don't use Intel or AMD VT-X)
   # config.vm.provider :virtualbox do |vb|
   #  vb.customize ["modifyvm", :id, "--hwvirtex", "off"]

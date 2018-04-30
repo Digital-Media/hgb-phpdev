@@ -101,7 +101,7 @@ A host folder named code in the directory, where the Vagrantfile is stored, is m
 * Here Students must add there code folder from the host maschine and map it to code
 * Start Box
 * Login with vagrant/vagrant
-* In Shell start ``./mount.sh`` to mount the ``code` folder of the host to ``/var/www/html/code``.
+* In Shell start ``./mount.sh`` to mount the ``code`` folder of the host to ``/var/www/html/code``.
 
 * Test Installation and Mapping
   * https://192.168.7.7/code

@@ -90,7 +90,7 @@ A host folder named code in the directory, where the Vagrantfile is stored, is m
 # Providing a Virtual Box Image, not using Vagrant to start
 
 * copy hgb-phpdev-base.box and Vagrantfile to a different directory
-* Remove shared folders and provistioning from Vagrantfile
+* Remove shared folders and provisioning from Vagrantfile
 * Start ``vagrant up`` to extract the Virtual Box Files to Folder "VirtualBox VMs"
 
 

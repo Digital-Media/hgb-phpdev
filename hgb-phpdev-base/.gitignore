@@ -1,0 +1,4 @@
+.vagrant/
+code/
+*.log
+!.gitignore

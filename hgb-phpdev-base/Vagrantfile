@@ -1,0 +1,122 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# vim: set et :
+
+Vagrant.configure("2") do |config|
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # We use the original ubuntu box with ubuntu 16.04 LTS
+  config.vm.box = "bento/ubuntu-16.04" 
+
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  # Avoiding IP conflicts with FH network based on 10.*.*.*
+  config.vm.network "private_network", ip: "192.168.7.7"
+
+  # Mapping a folder, that can be used for WEB excercises, allowing apache running as www-data to write data to these directories
+  config.vm.synced_folder "code", "/var/www/html/code", create: true, owner: "www-data", group: "www-data"
+  
+  config.vm.boot_timeout = 1500
+  
+	# Configuring Image for use as web development environment
+  config.vm.provision "Adding PHP7 Repository", type: "shell",
+    inline:  <<-SH
+	  add-apt-repository -y ppa:ondrej/php
+      apt-get -y update && apt-get -y upgrade
+	SH
+	  
+  config.vm.provision "Installing and/or configuring Apache with SSL, PHP7, MariaDB, PHPMyAdmin, XDebug, HTTPs Redirct ", type: "shell",
+    inline:  <<-SH
+	  echo "######################################################"
+	  echo "## Setting debconf-settings for noninteractive mode ##"
+	  echo "######################################################"
+	  export DEBIAN_FRONTEND=noninteractive
+      debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
+      debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
+      
+	  echo "########################"
+	  echo "## Installing MariaDB ##"
+	  echo "########################"
+	  apt-get -y -qq install mariadb-server mariadb-client
+      sudo mysql -e "CREATE USER 'onlineshop'@'localhost' IDENTIFIED BY 'geheim'"
+      sudo mysql -e "GRANT ALL PRIVILEGES ON onlineshop.* TO 'onlineshop'@'localhost'"
+      
+	  echo "############################################"
+	  echo "## Installing Apache, PHP7.1 + Extensions ##"
+	  echo "############################################"
+      apt-get -y -qq install php7.1 apache2 libapache2-mod-php7.1
+      apt-get -y -qq install php7.1-zip php7.1-mysql php7.1-curl php7.1-dev php7.1-gd php7.1-intl php-pear php-imagick php7.1-imap php7.1-mcrypt php7.1-tidy php7.1-xmlrpc php7.1-xsl php7.1-mbstring php-gettext phpmyadmin php-xdebug
+      
+	  echo "###############################"
+	  echo "## Activating SSL for Apache ##"
+	  echo "###############################"
+	  a2enmod ssl
+      a2ensite default-ssl
+      
+	  echo "################################"
+	  echo "# Activating XDEBUG for Apache #"
+	  echo "################################"
+	  INI=/etc/php/7.1/mods-available/xdebug.ini
+      >> "$INI" echo 'xdebug.remote_enable=1'
+      >> "$INI" echo 'xdebug.remote_connect_back=1'
+      >> "$INI" echo 'xdebug.remote_port=9000'
+      
+	  echo "########################################"
+	  echo "## Adding permanent redirect to HTTPs ##"
+	  echo "########################################"
+	  cd /etc/apache2/sites-available
+      sed -i '29i #' 000-default.conf
+      sed -i '30i # Redirct permanently to https ' 000-default.conf
+      sed -i '31i # added by Martin Harrer for demonstration purposes in web lessons' 000-default.conf
+      sed -i '32i Redirect permanent / https://192.168.7.7/' 000-default.conf
+      
+	  echo "################################################"
+	  echo "## Linking PHPMyAdmin to Apache Document Root ##"
+	  echo "################################################"
+      ln -s /usr/share/phpmyadmin/ /var/www/html/phpmyadmin
+	SH
+	
+  config.vm.provision "## Installing PHPCodeSniffer ##", type: "shell",
+    inline:  <<-SH
+	  cd /usr/local/bin
+	  curl -Ol https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+      curl -Ol https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+	  mv phpcs.phar /usr/local/bin/phpcs
+      mv phpcbf.phar /usr/local/bin/phpcbf
+	  chown root:root phpcs phpcbf
+	  chmod 755 phpcs phpcbf
+	SH
+	
+  config.vm.provision "## Installing composer ##", type: "shell",
+    inline:  <<-SH
+	  cd /home/vagrant
+      php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+      php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+      php composer-setup.php --install-dir=/usr/local/bin
+      php -r "unlink('composer-setup.php');"
+	  mv /usr/local/bin/composer.phar /usr/local/bin/composer
+	SH
+	  
+  config.vm.provision "## Writing File for mounting shared folder code manually to /var/www/html/code ##", type: "shell",
+    inline:  <<-SH
+	  MOUNT=/home/vagrant/mount.sh
+	  >> "$MOUNT" echo 'echo # with virtual box gui a host directory has to be mapped to code'
+	  >> "$MOUNT" echo 'sudo mount -t vboxsf -o umask=0022,gid=33,uid=33 code /var/www/html/code'
+	  chmod a+x "$MOUNT";
+	  chown vagrant:vagrant "$MOUNT";
+    SH
+  
+  config.vm.provision "## Starting Apache and MariaDB always ##", type: "shell", run: "always",
+    inline: <<-SH
+	  service apache2 restart   
+      service mysql restart
+    SH
+	
+  config.vm.provision "## Giving hint, how to change keyboard layout to german ##", type: "shell", run: "always",
+    inline: <<-SH
+	  echo "To change keyboard layout to german start command below. Just follow the instructions."
+      echo "sudo dpkg-reconfigure keyboard-configuration"	  
+    SH
+
+end

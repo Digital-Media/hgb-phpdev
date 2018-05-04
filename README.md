@@ -3,6 +3,8 @@ Repo to provide a Vagrantfile for a web development environment for excercises i
 
 Visit us at https://www.fh-ooe.at/en/hagenberg-campus/
 
+See the [Wiki](https://github.com/Digital-Media/hgb-phpdev/wiki) to learn how the vagrant box was built.
+
 # Install
 
 * Virtualization has to be activated in BIOS
@@ -75,17 +77,6 @@ A host folder named code in the directory, where the Vagrantfile is stored, is m
   * Delete the VM in ``/Users/\<username\>/VirtualBox VMs`` or use Virtual Box for this. Keep VMs you still need in this folder.
   * Delete ``<path-to>/hgb-phpdev-base/.vagrant``
   * ``vagrant up``
-
-
-# How this box was built
-
-* ``vagrant up`` with [hgb-phpdev-base](https://github.com/Digital-Media/hgb-phpdev-base/tree/v0.9.1)
-* connect via ``vagrant ssh``
-* In ssh-Terminal: ``sudo dpkg-reconfigure keyboard-configuration``
-* Follow the instructions to switch keyboard layout to german
-* ``exit``
-* In Powershell: ``vagrant package --output hgb-phpdev-base.box``
-* Provide the box on [packagist.org](https://app.vagrantup.com/fhooe/boxes/hgb-phpdev)
 
 # Providing a Virtual Box Image, not using Vagrant to start
 

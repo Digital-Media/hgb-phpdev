@@ -80,8 +80,9 @@ A host folder named code in the directory, where the Vagrantfile is stored, is m
 
 # A pure Virtual Box Image, not using Vagrant to start
 
+* Installation is the same as above in section Install, but you need not install Vagrant
 * Download ZIP-File from [FHOOE Cloud](https://filebox.fhooecloud.at/s/g2yZ0XEMiEaIJ7A)
-* Unzip File to a destination where you have write permission 
+* Unzip this File to a destination where you have write permission 
 * Start Virtual Box GUI 
 * Go to Maschine -> Add and select the vbox file from the file system
 * Add a shared folder. Add the provided code folder from the host maschine and map it to code
@@ -89,6 +90,6 @@ A host folder named code in the directory, where the Vagrantfile is stored, is m
 * Login with vagrant/vagrant
 * In Shell start ``./mount.sh`` to mount the ``code`` folder of the host to ``/var/www/html/code``.
 
-* Test Installation and Mapping
+# Test Installation and Mapping
   * https://192.168.7.7/code
   * https://192.168.7.7/phpmyadmin

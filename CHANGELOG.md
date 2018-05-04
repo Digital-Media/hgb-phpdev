@@ -5,7 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- Switching to Ubuntu18.04 LTS
+
+## [1.1.0] - 2018-05-04
+### Changed
 - Merged hgb-phpdev-base into hgb-phpdev
+### Fixed
+- removed unnecessary step from creating pure VirtualBox Image
 
 
 ## [1.0.0] - 2018-04-30

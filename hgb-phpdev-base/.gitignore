@@ -1,4 +1,5 @@
 .vagrant/
 code/
 *.log
+*.box
 !.gitignore

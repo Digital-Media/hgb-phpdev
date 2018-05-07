@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 - Switching to Ubuntu18.04 LTS
 
+## [1.1.1] - 2018-05-07
+### Fixed
+- Composer Installation compares hash with online Hash installer.sig, not with a predefinded string.
+
 ## [1.1.0] - 2018-05-04
 ### Changed
 - Merged hgb-phpdev-base into hgb-phpdev

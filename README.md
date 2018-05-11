@@ -91,5 +91,5 @@ A host folder named code in the directory, where the Vagrantfile is stored, is m
 * In Shell start ``./mount.sh`` to mount the ``code`` folder of the host to ``/var/www/html/code``.
 
 # Test Installation and Mapping
-  * https://192.168.7.7/code
-  * https://192.168.7.7/phpmyadmin
+  * https://localhost/code
+  * https://localhost/phpmyadmin

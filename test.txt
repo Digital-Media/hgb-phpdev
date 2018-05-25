@@ -1,0 +1,10 @@
+  config.vm.provision "Switching to AllowOverride All for /var/www/html/code/* ", type: "shell",
+    inline:  <<-SH
+  	  cd /etc/apache2/sites-available
+        sed -i '131i <Directory /var/www/html/code/*>' default-ssl.conf
+        sed -i '132i        Options Indexes FollowSymLinks MultiViews' default-ssl.conf
+        sed -i '133i        AllowOverride All' default-ssl.conf
+        sed -i '134i </Directory>' default-ssl.conf
+	a2enmod rewrite
+	service apache2 restart
+    SH

@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
 
   # We use a ubuntu box with ubuntu 16.04 LTS based on bento/ubuntu-16.04
   config.vm.box = "fhooe/hgb-phpdev" 
-  config.vm.box_version = "1.0.0"
+  config.vm.box_version = "~> 1.0"
   config.vm.boot_timeout = 1500
   
   # Deactivate hardware accelleration for Vitualization in Virtual Box (Don't use Intel or AMD VT-X)
@@ -23,5 +23,4 @@ Vagrant.configure("2") do |config|
 
   # Mapping a folder, that can be used for HM2 excercises, allowing apache running as www-data to write data to these directories
   config.vm.synced_folder "code", "/var/www/html/code", create: true, owner: "www-data", group: "www-data"
-
 end

@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   # https://docs.vagrantup.com.
 
   # We use the original ubuntu box with ubuntu 16.04 LTS
-  config.vm.box = "bento/ubuntu-16.04" 
+  config.vm.box = "bento/ubuntu-16.04"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -18,14 +18,14 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "code", "/var/www/html/code", create: true, owner: "www-data", group: "www-data"
   
   config.vm.boot_timeout = 1500
-  
+
 	# Configuring Image for use as web development environment
   config.vm.provision "Adding PHP7 Repository", type: "shell",
     inline:  <<-SH
 	  add-apt-repository -y ppa:ondrej/php
-      apt-get -y update && apt-get -y upgrade
+      apt-get -y update
 	SH
-	  
+
   config.vm.provision "Installing and/or configuring Apache with SSL, PHP7, MariaDB, PHPMyAdmin, XDebug, HTTPs Redirct ", type: "shell",
     inline:  <<-SH
 	  echo "######################################################"
@@ -45,12 +45,13 @@ Vagrant.configure("2") do |config|
 	  echo "############################################"
 	  echo "## Installing Apache, PHP7.1 + Extensions ##"
 	  echo "############################################"
-      apt-get -y -qq install php7.1 apache2 libapache2-mod-php7.1
+      apt-get -y -qq install apache2 php7.1 libapache2-mod-php7.1
       apt-get -y -qq install php7.1-zip php7.1-mysql php7.1-curl php7.1-dev php7.1-gd php7.1-intl php-pear php-imagick php7.1-imap php7.1-mcrypt php7.1-tidy php7.1-xmlrpc php7.1-xsl php7.1-mbstring php-gettext phpmyadmin php-xdebug
       
 	  echo "###############################"
-	  echo "## Activating SSL for Apache ##"
+	  echo "## Activating SSL and mod_rewrite for Apache ##"
 	  echo "###############################"
+	  a2enmod rewrite
 	  a2enmod ssl
       a2ensite default-ssl
       
@@ -71,6 +72,15 @@ Vagrant.configure("2") do |config|
       sed -i '31i # added by Martin Harrer for demonstration purposes in web lessons' 000-default.conf
       sed -i '32i Redirect permanent / https://192.168.7.7/' 000-default.conf
       
+  	  echo "####################################################################"
+  	  echo "## Switching to AllowOverride All for /var/www/html/code/*/public ##"
+  	  echo "####################################################################"
+  	  cd /etc/apache2/sites-available
+        sed -i '131i <Directory /var/www/html/code/*/public>' default-ssl.conf
+        sed -i '132i        Options Indexes FollowSymLinks MultiViews' default-ssl.conf
+        sed -i '133i        AllowOverride All' default-ssl.conf
+        sed -i '134i </Directory>' default-ssl.conf
+
 	  echo "################################################"
 	  echo "## Linking PHPMyAdmin to Apache Document Root ##"
 	  echo "################################################"

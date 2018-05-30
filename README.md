@@ -64,3 +64,4 @@ A host folder named code in the directory, where the Vagrantfile is stored, is m
   * https://localhost/phpmyadmin
   
 # For Troubleshooting Tips see the [Wiki](https://github.com/Digital-Media/hgb-phpdev/wiki/Troubleshooting)
+# How the images are built is described [here](https://github.com/Digital-Media/hgb-phpdev/wiki)

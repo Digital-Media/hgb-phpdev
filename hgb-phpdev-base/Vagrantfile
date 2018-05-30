@@ -114,25 +114,11 @@ Vagrant.configure("2") do |config|
       php -r "unlink('composer-setup.php');"
 	  mv /usr/local/bin/composer.phar /usr/local/bin/composer
 	SH
-	  
-  config.vm.provision "## Writing File for mounting shared folder code manually to /var/www/html/code ##", type: "shell",
-    inline:  <<-SH
-	  MOUNT=/home/vagrant/mount.sh
-	  >> "$MOUNT" echo 'echo "with virtual box gui a host directory has to be mapped to code"'
-	  >> "$MOUNT" echo 'sudo mount -t vboxsf -o umask=0022,gid=33,uid=33 code /var/www/html/code'
-	  chmod a+x "$MOUNT";
-	  chown vagrant:vagrant "$MOUNT";
-    SH
-  
+	    
   config.vm.provision "## Starting Apache and MariaDB with run: always ##", type: "shell", run: "always",
     inline: <<-SH
 	  service apache2 restart   
       service mysql restart
     SH
 	
-  config.vm.post_up_message = <<-MESSAGE
-      To change keyboard layout to german start command below. Just follow the instructions.
-      vagrant ssh
-      sudo dpkg-reconfigure keyboard-configuration
-   MESSAGE
 end

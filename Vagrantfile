@@ -10,7 +10,12 @@ Vagrant.configure("2") do |config|
   config.vm.box = "fhooe/hgb-phpdev" 
   config.vm.box_version = "~> 1.0"
   config.vm.boot_timeout = 1500
-  
+
+  # If Vagrant always hangs during SSH to box during Startup, this may help if normal troubleshooting doesn't work
+  # Deactivate ssh keys for login and use password instead
+  # config.ssh.password = "vagrant"
+  # config.ssh.insert_key = false
+
   # Deactivate hardware accelleration for Vitualization in Virtual Box (Don't use Intel or AMD VT-X)
   # config.vm.provider :virtualbox do |vb|
   #  vb.customize ["modifyvm", :id, "--hwvirtex", "off"]

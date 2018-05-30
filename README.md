@@ -5,6 +5,8 @@ Visit us at https://www.fh-ooe.at/en/hagenberg-campus/
 
 See the [Wiki](https://github.com/Digital-Media/hgb-phpdev/wiki) to learn how the vagrant box was built.
 
+For Troubleshooting Tips see the [Wiki](https://github.com/Digital-Media/hgb-phpdev/wiki/Troubleshooting)
+
 # Install
 
 * Virtualization has to be activated in BIOS
@@ -23,45 +25,24 @@ See the [Wiki](https://github.com/Digital-Media/hgb-phpdev/wiki) to learn how th
 
 # Versions tested
 
-* Vagrant 1.9.8
-* Virtual Box 5.1.28
+* Vagrant 1.9.8 and 2.1.1
+* Virtual Box 5.1.28 and 5.2.12
 * PHPStorm 2017.2.3
 
-# Use hgb-phpdev for web development
+# Usage
 
-Clone or download hgb-phpdev from GitHub and install your web project into /var/www/html/code.
-A host folder named code in the directory, where the Vagrantfile is stored, is mapped to /var/www/html/code.
-
-# Further Steps
-
+* Download or clone hgb-phpdev from GitHub
 * Open PowerShell or terminal
 * ``cd \<path-to\>/hgb-phpdev`` 
-* While first ``vagrant up`` you need a stable internet connection
+* Create a directory ``code``
+* This ``code`` directory, is mapped to /var/www/html/code in the image via shared folders.
+* While first ``vagrant up`` you need a stable internet connection for downloading the box file
 * ``vagrant up`` (to start image)
 * ``vagrant halt`` (to stop image)
 * ``vagrant ssh`` (if you need a bash)
 * for more information see [Vagrant Documentation](https://www.vagrantup.com/docs/)
 
-# Test installation and Mapping in Browser
+# Test installation and mapping in browser
 
   * https://192.168.7.7/code
   * https://192.168.7.7/phpmyadmin
-
-# A pure Virtual Box Image, not using Vagrant to start
-
-* Installation is the same as above in section Install, but you need not install Vagrant
-* Download ZIP-File from [FHOOE Cloud](https://filebox.fhooecloud.at/s/g2yZ0XEMiEaIJ7A)
-* Unzip this File to a destination where you have write permission 
-* Start Virtual Box GUI 
-* Go to Maschine -> Add and select the vbox file from the file system
-* Add a shared folder. Add the provided code folder from the host maschine and map it to code
-* Start Box
-* Login with vagrant/vagrant
-* In Shell start ``./mount.sh`` to mount the ``code`` folder of the host to ``/var/www/html/code``.
-
-# Test Installation and Mapping
-  * https://localhost/code
-  * https://localhost/phpmyadmin
-  
-# For Troubleshooting Tips see the [Wiki](https://github.com/Digital-Media/hgb-phpdev/wiki/Troubleshooting)
-# How the images are built is described [here](https://github.com/Digital-Media/hgb-phpdev/wiki)

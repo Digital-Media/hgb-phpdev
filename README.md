@@ -47,37 +47,6 @@ A host folder named code in the directory, where the Vagrantfile is stored, is m
   * https://192.168.7.7/code
   * https://192.168.7.7/phpmyadmin
 
-# Troubleshooting tips
-
-* Activate virtualization in BIOS/UEFI. Press F2, F10, F12, Esc during startup of your computer.
-  * see documentation of your computer for more details.
-  * look for "activate VT-X", "Virtualization" or something similar. Sometimes this setting is in the security submenu.
-* Use a short path to your *Vagrantfile* without blanks and special characters.
-* Keep the downloaded ZIP file for a quick reinstall without needing network access.
-* Don't use Windows PowerShell ISE
-
-* If something goes wrong. vagrant doesn't start, hangs or throws errors.
-  * Try ``vagrant halt`` and start again with ``vagrant reload``
-  * or ``vagrant destroy`` and start again with ``vagrant up``
-* For more tips see the Wiki
-
-# Clean reinstall if steps before didn't help
-
-* Windows:
-  * Delete ``C:\Users\<username>\.vagrant.d``
-  * Delete ``C:\Users\<username>\.Virtualbox``
-  * Delete the VM in ``C:\Users\<username>\VirtualBox VMs`` or use Virtual Box for this. Keep VMs you still need in this folder.
-  * Delete ``<path-to>/hgb-phpdev-base/.vagrant``
-  * ``vagrant up``
-  
-* MAC:
-  * CMD - SHIFT shows hidden files and folders in finder
-  * Delete ``/Users/\<username\>/.vagrant.d``
-  * Delete ``/Users/\<username\>/Library/VirtualBox``
-  * Delete the VM in ``/Users/\<username\>/VirtualBox VMs`` or use Virtual Box for this. Keep VMs you still need in this folder.
-  * Delete ``<path-to>/hgb-phpdev-base/.vagrant``
-  * ``vagrant up``
-
 # A pure Virtual Box Image, not using Vagrant to start
 
 * Installation is the same as above in section Install, but you need not install Vagrant
@@ -93,3 +62,5 @@ A host folder named code in the directory, where the Vagrantfile is stored, is m
 # Test Installation and Mapping
   * https://localhost/code
   * https://localhost/phpmyadmin
+  
+# For Troubleshooting Tips see the [Wiki](https://github.com/Digital-Media/hgb-phpdev/wiki/Troubleshooting)

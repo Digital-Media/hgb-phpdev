@@ -17,7 +17,7 @@ For Troubleshooting Tips see the [Wiki](https://github.com/Digital-Media/hgb-php
   * https://www.microsoft.com/en-us/download/details.aspx?id=40855
 * For MAC: System Settings -> Security --> Allow Virtual Box
 
-* Install [Virtual Box](https://www.virtualbox.org/wiki/Download_Old_Builds_5_1)
+* Install [Virtual Box](https://www.virtualbox.org/wiki/Downloads)
 * Install [Vagrant by HashiCorp](https://www.vagrantup.com/downloads.html)
 * Reboot your computer
 * Recommended: Install [PHPStorm Toolbox](https://www.jetbrains.com/toolbox/app/) 
@@ -25,15 +25,15 @@ For Troubleshooting Tips see the [Wiki](https://github.com/Digital-Media/hgb-php
 
 # Versions tested
 
-* Vagrant 1.9.8 and 2.1.1
-* Virtual Box 5.1.28 and 5.2.12
-* PHPStorm 2017.2.3
+* Vagrant 2.1.4
+* Virtual Box 5.2.18
+* PHPStorm 2018.1.6
 
 # Usage
 
 * Download or clone hgb-phpdev from GitHub
 * Open PowerShell or terminal
-* ``cd \<path-to\>/hgb-phpdev`` 
+* ``cd \<path-to\>hgb-phpdev`` 
 * Create a directory ``code``
 * This ``code`` directory, is mapped to /var/www/html/code in the image via shared folders.
 * While first ``vagrant up`` you need a stable internet connection for downloading the box file

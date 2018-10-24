@@ -51,6 +51,6 @@ do
     path=$line;
     if [ "$path" != "$diffpath" ]
     then
-      eval diff -s $path/onlineshop.sql $diffpath/onlineshop.sql | grep identical > diff.lis
+      eval diff -s $path/onlineshop.sql $diffpath/onlineshop.sql | grep identical > cheat.lis
     fi
 done < abgaben.lis

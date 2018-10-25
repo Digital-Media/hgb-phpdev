@@ -47,6 +47,7 @@ Vagrant.configure("2") do |config|
 	  echo "############################################"
       apt-get -y -qq install apache2 php7.1 libapache2-mod-php7.1
       apt-get -y -qq install php7.1-zip php7.1-mysql php7.1-curl php7.1-dev php7.1-gd php7.1-intl php-pear php-imagick php7.1-imap php7.1-mcrypt php7.1-tidy php7.1-xmlrpc php7.1-xsl php7.1-mbstring php-gettext phpmyadmin php-xdebug
+      apt-get -y -qq install zip unzip
       
 	  echo "###############################"
 	  echo "## Activating SSL and mod_rewrite for Apache ##"

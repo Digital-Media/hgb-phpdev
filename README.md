@@ -1,4 +1,7 @@
 # hgb-phpdev
+
+**Warning: This project is discontinued and has been superseded by [fhooe-webdev](https://github.com/Digital-Media/fhooe-webdev). This repository is kept solely for archiving purposes.**
+
 Repo to provide a Vagrantfile for a web development environment for excercises in web lessons
 
 Visit us at https://www.fh-ooe.at/en/hagenberg-campus/
